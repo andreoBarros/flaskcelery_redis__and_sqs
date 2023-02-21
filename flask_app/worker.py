@@ -1,11 +1,11 @@
 from workers import worker_config
 from celery import Celery
-from core.config import environment
+from core.config import settings
 
 
 def worker_init() -> Celery:
     worker = Celery(__name__)
-    configuration = worker_config.setup(worker_type=environment.get("WORKER_TYPE"))
+    configuration = worker_config.setup(worker_type=settings.WORKER_TYPE)
     worker.conf.update(configuration.get_config())
     return worker
 
@@ -28,4 +28,3 @@ def new_worker_instance():
 
 if __name__ == "__main__":
     new_worker_instance()
-

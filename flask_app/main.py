@@ -1,7 +1,6 @@
 from flask import Flask
 from workers import worker_config
-from core.config import environment
-from core.enum_models import CeleryWorkerType
+from core.config import settings
 import os
 
 app = Flask(__name__)
@@ -9,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/check_worker_config')
 def check_worker_config():
-    configuration = worker_config.setup(worker_type=environment.get("WORKER_TYPE"))
+    configuration = worker_config.setup(worker_type=settings.WORKER_TYPE)
     return str(configuration.get_config())
 
 
