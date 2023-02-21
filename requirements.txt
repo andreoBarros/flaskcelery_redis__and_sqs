@@ -1,0 +1,4 @@
+python-dotenv~=0.21.1
+Flask~=2.2.3
+redis~=4.5.1
+celery[sqs, redis]~=5.2.7
