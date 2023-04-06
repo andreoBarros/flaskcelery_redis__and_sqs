@@ -28,7 +28,7 @@ class CelerySQSConfig:
 
 
 def setup(worker_type: CeleryWorkerType) -> CeleryRedisConfig | CelerySQSConfig:
-    if worker_type == CeleryWorkerType.REDIS:
+    if worker_type.upper() == CeleryWorkerType.REDIS:
         return CeleryRedisConfig(
             result_backend=settings.REDIS_BACKEND_URL,
             broker_url=settings.REDIS_BROKER_URL
@@ -50,5 +50,5 @@ def setup(worker_type: CeleryWorkerType) -> CeleryRedisConfig | CelerySQSConfig:
 
 
 def import_tasks():
-    from workers.async_tasks import example_waiting_task
-    _ = [example_waiting_task]
+    from workers.async_tasks import example_tasks
+    _ = [example_tasks]

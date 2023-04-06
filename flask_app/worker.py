@@ -1,6 +1,7 @@
 from workers import worker_config
 from celery import Celery
 from core.config import settings
+import sys
 
 
 def worker_init() -> Celery:
@@ -14,15 +15,19 @@ celery_worker = worker_init()
 
 
 def new_worker_instance():
-    worker_config.import_tasks()
-    celery_worker.autodiscover_tasks()
-    celery_worker.worker_main(
-        argv=[
+    default_args = [
             "worker",
             "-E",
             "--loglevel=info",
             # "--concurrency=1" Optional concurrency, for synchronous tasks
         ]
+    worker_args = default_args + sys.argv[1:]
+
+    worker_config.import_tasks()
+
+    celery_worker.autodiscover_tasks()
+    celery_worker.worker_main(
+        argv=worker_args
     )
 
 

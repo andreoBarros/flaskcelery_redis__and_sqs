@@ -3,7 +3,7 @@ from core.enum_models import CeleryWorkerType
 import dotenv
 
 # Reads from a .env in the main.py project folder
-environment = dotenv.dotenv_values("flask_app/.env")
+environment = dotenv.dotenv_values(".env")
 
 
 @dataclass
