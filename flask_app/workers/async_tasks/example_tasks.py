@@ -30,7 +30,7 @@ def wait_for_time(some_string: str = "default-value", waiting_for: int = 6):
 
 @celery_worker.task(
     bind=True,
-    name="divide_two_number",
+    name="divide_two_numbers",
     queue="celery",
     default_retry_delay=RETRY_IN_SECONDS,
     max_retries=3
